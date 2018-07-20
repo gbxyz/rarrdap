@@ -157,12 +157,17 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 	#
 	# write RDAP object to disk
 	#
-	my $jfile = sprintf('%s/%d.json', $data->{'handle'}, $id);
+	my $jfile = sprintf('%s/%d.json', $dir, $data->{'handle'});
 
 	my $file = IO::File->new;
-	$file->open($jfile, '>:utf8');
-	$file->print($json->encode($data));
-	$file->close;
+	if (!$file->open($jfile, '>:utf8')) {
+		printf(STDERR "Cannot write to '%s': %s\n", $jfile, $!);
+		exit(1);
+
+	} else {
+		$file->print($json->encode($data));
+		$file->close;
+	}
 }
 
 print STDERR "done\n";
