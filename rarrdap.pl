@@ -147,17 +147,15 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 	#
 	# add some links
 	#
-	$data->{'links'} = [
-		{
-			'rel'	=> 'related',
-			'href'	=> 'https://about.rdap.org',
-		}
-	];
+	push(@{$data->{'links'}}, {
+		'rel'	=> 'related',
+		'href'	=> 'https://about.rdap.org',
+	});
 
 	#
 	# write RDAP object to disk
 	#
-	my $jfile = sprintf('%s/%d.json', $dir, $data->{'handle'});
+	my $jfile = sprintf('%s/%s.json', $dir, $data->{'handle'});
 
 	my $file = IO::File->new;
 	if (!$file->open($jfile, '>:utf8')) {
