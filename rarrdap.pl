@@ -3,6 +3,7 @@
 # free software; you can redistribute it and/or modify it under the same
 # terms as Perl itself.
 use Cwd;
+use DateTime;
 use File::Basename qw(dirname basename);
 use File::stat;
 use IO::File;
@@ -125,7 +126,11 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 
 	if ($internic->{$id}->{'URL'}) {
 		$internic->{$id}->{'URL'} = 'http://'.$internic->{$id}->{'URL'} if ($internic->{$id}->{'URL'} !~ /^https?:\/\//);
-		push(@{$data->{'links'}}, { 'rel' => 'related', 'href' => $internic->{$id}->{'URL'}});
+		push(@{$data->{'links'}}, {
+			'title' => "Registrar's Website",
+			'rel' => 'related',
+			'href' => $internic->{$id}->{'URL'},
+		});
 	}
 
 	push(@{$data->{'remarks'}}, {
@@ -144,10 +149,16 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 		}
 	];
 
+	$data->{'events'} = [ {
+		'eventAction' => 'last update of RDAP database',
+		'eventDate' => DateTime->now->iso8601,
+	} ];
+
 	#
 	# add some links
 	#
 	push(@{$data->{'links'}}, {
+		'title'	=> 'About RDAP',
 		'rel'	=> 'related',
 		'href'	=> 'https://about.rdap.org',
 	});
