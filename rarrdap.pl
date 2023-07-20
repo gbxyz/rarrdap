@@ -84,6 +84,11 @@ foreach my $row (@{csv('in' => $internic_list, 'headers' => 'auto')}) {
 	$internic->{$row->{'iana_id'}} = $row;
 }
 
+my $all = {
+  'rdapConformance' => [ 'rdap_level_0' ],
+  'entitySearchResults' => [],
+};
+
 foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 	next if ('Terminated' eq $iana->{$id}->{'Status'});
 
@@ -177,6 +182,26 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 		$file->print($json->encode($data));
 		$file->close;
 	}
+
+    $all->{'notices'} = $data->{'notices'} unless (defined($all->{'notices'}));
+    delete($data->{'notices'});
+    delete($data->{'rdapConformance'});
+
+    push(@{$all->{'entitySearchResults'}}, $data);
+}
+
+#
+# write RDAP object to disk
+#
+my $jfile = sprintf('%s/_all.json', $dir);
+my $file = IO::File->new;
+if (!$file->open($jfile, '>:utf8')) {
+	printf(STDERR "Cannot write to '%s': %s\n", $jfile, $!);
+	exit(1);
+
+} else {
+	$file->print($json->encode($all));
+    $file->close;
 }
 
 print STDERR "done\n";
