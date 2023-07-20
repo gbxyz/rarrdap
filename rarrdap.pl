@@ -140,7 +140,7 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 
 	push(@{$data->{'remarks'}}, {
 		'title' => 'RAA Version',
-		'description' => [ int($internic->{$id}->{'RAA'}) ]
+		'description' => [ $internic->{$id}->{'RAA'} ]
 	}) if ($internic->{$id}->{'RAA'});
 
 	$data->{'notices'} = [
