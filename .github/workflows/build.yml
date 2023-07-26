@@ -17,6 +17,8 @@ jobs:
 
       - name: setup SSH deploy key
         run: |
+          whoami
+          cat /etc/passwd
           echo $HOME
           echo \$HOME
           mkdir \$HOME/.ssh
