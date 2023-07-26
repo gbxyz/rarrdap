@@ -17,6 +17,8 @@ jobs:
 
       - name: setup SSH deploy key
         run: |
+          echo $HOME
+          echo \$HOME
           mkdir \$HOME/.ssh
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > \$HOME/.ssh/id_ed25519
           chmod -R 0700 \$HOME/.ssh
