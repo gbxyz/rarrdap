@@ -231,7 +231,7 @@ L<https://registrars.rdap.org>, for example:
 
 =back
 
-Entity handles have the "-iana" object tag, as per L<https://tools.ietf.org/html/draft-ietf-regext-rdap-object-tag-04>.
+Entity handles have the "-iana" object tag, as per L<https://www.rfc-editor.org/rfc/rfc8521.html>.
 
 =head1 USAGE
 
