@@ -15,7 +15,7 @@ An example of an RDAP service which provides access to this data may be found at
 
 - [https://registrars.rdap.org/entity/1564-iana](https://registrars.rdap.org/entity/1564-iana)
 
-Entity handles have the "-iana" object tag, as per [https://tools.ietf.org/html/draft-ietf-regext-rdap-object-tag-04](https://tools.ietf.org/html/draft-ietf-regext-rdap-object-tag-04).
+Entity handles have the "-iana" object tag, as per [https://www.rfc-editor.org/rfc/rfc8521.html](https://www.rfc-editor.org/rfc/rfc8521.html).
 
 # USAGE
 
