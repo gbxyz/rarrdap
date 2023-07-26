@@ -1,4 +1,4 @@
-name: update registrar RDAP data
+name: Update registrar RDAP data
 
 on:
   push:
