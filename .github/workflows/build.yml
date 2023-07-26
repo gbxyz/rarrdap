@@ -17,7 +17,6 @@ jobs:
 
       - name: setup SSH deploy key
         run: |
-          whoami
           mkdir -p $HOME/.ssh
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > $HOME/.ssh/id_ed25519
           chmod -R 0700 $HOME/.ssh
@@ -40,7 +39,7 @@ jobs:
 
       - name: update public repository
         run: |
-          git clone git@github.com/gbxyz/rarrdap-web.git
+          git clone git@github.com:gbxyz/rarrdap-web.git
           pushd rarrdap-web
           git config user.name "GitHub Actions"
           git config user.email github-actions@rdap.org
