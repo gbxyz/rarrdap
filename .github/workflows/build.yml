@@ -40,11 +40,11 @@ jobs:
       - name: update public repository
         run: |
           git clone git@github.com:gbxyz/rarrdap-web.git
-          pushd rarrdap-web
+          pushd rarrdap-web/entity
           git config user.name "GitHub Actions"
           git config user.email github-actions@rdap.org
           rm -f *json
-          cp -fv ../data/*json .
+          cp -fv ../../data/*json .
           git add .
           git commit -m "automatic update"
           git push
