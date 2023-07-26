@@ -127,10 +127,10 @@ foreach my $id (sort({ $a <=> $b } uniq(keys(%{$iana}), keys(%{$internic})))) {
 	};
 
 	push(@{$data->{'vcardArray'}->[1]}, [ 'email', {} , 'text', $internic->{$id}->{'EMAIL'} ]) if ($internic->{$id}->{'EMAIL'});
-	push(@{$data->{'vcardArray'}->[1]}, [ 'addr', {} , 'text', [ $internic->{$id}->{'country_name'} ] ]) if ($internic->{$id}->{'country_name'});
+	push(@{$data->{'vcardArray'}->[1]}, [ 'adr', {} , 'text', [ '', '', '', '', '', '', $internic->{$id}->{'country_name'} ] ]) if ($internic->{$id}->{'country_name'});
 
 	if ($internic->{$id}->{'URL'}) {
-		$internic->{$id}->{'URL'} = 'http://'.$internic->{$id}->{'URL'} if ($internic->{$id}->{'URL'} !~ /^https?:\/\//);
+		$internic->{$id}->{'URL'} = 'http://'.$internic->{$id}->{'URL'} unless ($internic->{$id}->{'URL'} =~ /^https?:\/\//);
 		push(@{$data->{'links'}}, {
 			'title' => "Registrar's Website",
 			'rel' => 'related',
