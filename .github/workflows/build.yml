@@ -34,7 +34,7 @@ jobs:
         run: |
           git clone https://x-access-token:${GITHUB_TOKEN}@github.com/gbxyz/rarrdap-web.git
           pushd rarrdap-web
-          git remote origin set-url "https://x-access-token:${GITHUB_TOKEN}@github.com/gbxyz/rarrdap-web.git"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/gbxyz/rarrdap-web.git"
           git config user.name "GitHub Actions"
           git config user.email github-actions@rdap.org
           rm -f *json
