@@ -1,0 +1,35 @@
+name: update registrar RDAP data
+
+on:
+  push:
+    paths:
+      - 'rarrdap.pl'
+    branches: [ "main" ]
+  workflow_dispatch:
+  schedule:
+    - cron: '32 4 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install cpanm
+        run: |
+          apt-get update
+          apt-get -qqq install cpanminus
+
+      - name: install Perl modules
+        run: cpanm --notest DateTime JSON LWP::Protocol::https Text::CSV_XS
+
+      - name: create output directory
+        run: mkdir /tmp/data
+
+      - name: generate data
+        run: ./rarrdap.pl /tmp/data
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: registrar-rdap-data
+          path: /tmp/data
