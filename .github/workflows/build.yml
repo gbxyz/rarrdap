@@ -34,8 +34,9 @@ jobs:
         run: |
           git clone https://x-access-token:${GITHUB_TOKEN}@github.com/gbxyz/rarrdap-web.git
           pushd rarrdap-web
+          git config user.name "GitHub Actions"
+          git config user.email github-actions@rdap.org
           rm -f *json
           cp ../data/*json .
-          git add .
-          git commit --author "GitHub Actions <actions@github>" -m "automatic update"
+          git commit -a -m "automatic update"
           git push
