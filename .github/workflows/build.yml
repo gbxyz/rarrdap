@@ -18,12 +18,9 @@ jobs:
       - name: setup SSH deploy key
         run: |
           whoami
-          cat /etc/passwd
-          echo $HOME
-          echo \$HOME
-          mkdir \$HOME/.ssh
-          echo "${{ secrets.SSH_DEPLOY_KEY }}" > \$HOME/.ssh/id_ed25519
-          chmod -R 0700 \$HOME/.ssh
+          mkdir -p $HOME/.ssh
+          echo "${{ secrets.SSH_DEPLOY_KEY }}" > $HOME/.ssh/id_ed25519
+          chmod -R 0700 $HOME/.ssh
 
       - uses: actions/checkout@v3
 
