@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'rarrdap.pl'
+      - '.github/workflows/build.yml'
     branches: [ "main" ]
   workflow_dispatch:
   schedule:
@@ -17,19 +18,19 @@ jobs:
 
       - name: install cpanm
         run: |
-          apt-get update
-          apt-get -qqq install cpanminus
+          sudo apt-get update
+          sudo apt-get -qqq install cpanminus
 
       - name: install Perl modules
-        run: cpanm --notest DateTime JSON LWP::Protocol::https Text::CSV_XS
+        run: cpanm --sudo --notest DateTime JSON LWP::Protocol::https Text::CSV_XS
 
       - name: create output directory
-        run: mkdir /tmp/data
+        run: mkdir ./data
 
       - name: generate data
-        run: ./rarrdap.pl /tmp/data
+        run: ./rarrdap.pl ./data
 
       - uses: actions/upload-artifact@v3
         with:
           name: registrar-rdap-data
-          path: /tmp/data
+          path: ./data
