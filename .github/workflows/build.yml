@@ -18,7 +18,7 @@ jobs:
 
       - name: install cpanm
         run: |
-          sudo apt-get update
+          sudo apt-get -qqq update
           sudo apt-get -qqq install cpanminus
 
       - name: install Perl modules
@@ -37,7 +37,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email github-actions@rdap.org
           rm -f *json
-          cp ../data/*json .
+          cp -fv ../data/*json .
           git add .
           git commit -m "automatic update"
           git push
