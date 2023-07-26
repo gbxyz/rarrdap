@@ -32,7 +32,7 @@ if (!-e $dir || !-d $dir) {
 
 my $ua = LWP::UserAgent->new('agent' => sprintf('%s/%s', basename(__FILE__, '.pl'), $VERSION));
 
-my $json = JSON->new->pretty;
+my $json = JSON->new->pretty->canonical;
 
 my $iana_list = join('/', $dir, basename(IANA_LIST));
 if (!-e $iana_list || stat($iana_list)->mtime <= time()-86400) {
