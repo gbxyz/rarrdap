@@ -30,7 +30,12 @@ jobs:
       - name: generate data
         run: ./rarrdap.pl ./data
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: registrar-rdap-data
-          path: ./data
+      - name: update public repository
+        run: |
+          git clone https://https://x-access-token:${GITHUB_TOKEN}@github.com/gbxyz/rarrdap-web.git
+          pushd rarrdap-web
+          rm -f *json
+          cp ../data/*json .
+          git add .
+          git commit --author "GitHub Actions <actions@github>" -m "automatic update"
+          git push
